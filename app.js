@@ -30,7 +30,8 @@ let state = {
   tiles: [],
   basket: [],
   streak: 0,
-  lastMatchAt: 0
+  lastMatchAt: 0,
+  moves: 0
 };
 
 function clamp(n, a, b) {
@@ -107,9 +108,10 @@ function hideModal() {
 
 function computeLayout() {
   // responsive: choose columns based on width
-  const w = boardEl.clientWidth;
+  // Some mobile browsers report 0 width on first tick; fall back to viewport.
+  const w = Math.max(boardEl.clientWidth || 0, window.innerWidth || 0);
   const cols = w < 520 ? 5 : w < 740 ? 6 : 7;
-  const rows = w < 520 ? 7 : w < 740 ? 7 : 7;
+  const rows = 7;
   return { cols, rows };
 }
 
@@ -207,6 +209,8 @@ function onPickTile(tileEl) {
     return;
   }
 
+  state.moves += 1;
+
   tile.removed = true;
   tileEl.disabled = true;
 
@@ -227,7 +231,7 @@ function onPickTile(tileEl) {
     setHint(`Picked ${tile.kind}. Need ${3 - count} more for a match.`);
   }
 
-  if (state.remaining === 0) {
+  if (state.remaining <= 0 && state.moves > 0) {
     win();
     return;
   }
@@ -344,6 +348,7 @@ function restart(level = 1, keepScore = false) {
   state.basket = [];
   state.streak = 0;
   state.lastMatchAt = 0;
+  state.moves = 0;
   if (!keepScore) state.score = 0;
 
   const { deck, cols, rows } = buildDeck(state.level);
