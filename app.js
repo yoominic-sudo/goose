@@ -4,9 +4,11 @@ const boardEl = $("#board");
 const basketEl = $("#basket");
 const scoreEl = $("#score");
 const levelEl = $("#level");
+const streakEl = $("#streak");
 const goalEl = $("#goal");
 const remainingEl = $("#remaining");
 const hintEl = $("#hint");
+const dangerFillEl = $("#dangerFill");
 const btnRestart = $("#btnRestart");
 const btnMute = $("#btnMute");
 
@@ -26,7 +28,9 @@ let state = {
   goal: 0,
   sound: true,
   tiles: [],
-  basket: []
+  basket: [],
+  streak: 0,
+  lastMatchAt: 0
 };
 
 function clamp(n, a, b) {
@@ -78,9 +82,13 @@ function beep(freq, ms, type = "sine", gain = 0.05) {
 function updateHud() {
   scoreEl.textContent = String(state.score);
   levelEl.textContent = String(state.level);
+  if (streakEl) streakEl.textContent = String(state.streak);
   goalEl.textContent = String(state.goal);
   remainingEl.textContent = String(state.remaining);
   btnMute.textContent = state.sound ? "Sound: on" : "Sound: off";
+
+  const fill = Math.round((state.basket.length / BASKET_CAP) * 100);
+  if (dangerFillEl) dangerFillEl.style.width = `${fill}%`;
 }
 
 function setHint(text) {
@@ -179,6 +187,7 @@ function renderBasket() {
     `;
     slot.appendChild(div);
   }
+  updateHud();
 }
 
 function basketCountOf(kind) {
@@ -193,27 +202,22 @@ function onPickTile(tileEl) {
   if (!tile || tile.removed) return;
 
   if (state.basket.length >= BASKET_CAP) {
-    // already full
     beep(150, 100, "square", 0.06);
     shake(tileEl);
     return;
   }
 
-  // move
   tile.removed = true;
   tileEl.disabled = true;
 
   flyToBasket(tileEl, tile.kind);
   state.basket.push({ kind: tile.kind, from: tile.id });
   state.remaining -= 1;
-  updateHud();
 
-  // visually dim removed tile
   tileEl.style.opacity = "0.2";
   tileEl.style.transform = "scale(0.96)";
   tileEl.style.filter = "grayscale(0.2)";
 
-  // check match
   const count = basketCountOf(tile.kind);
   beep(420, 60, "sine", 0.04);
 
@@ -283,7 +287,6 @@ function flyToBasket(fromEl, kind) {
 }
 
 function clearTriple(kind) {
-  // remove 3 items from basket, preserve order of others.
   let removed = 0;
   const next = [];
   for (const item of state.basket) {
@@ -295,14 +298,18 @@ function clearTriple(kind) {
   }
   state.basket = next;
 
-  state.score += 30;
-  updateHud();
+  const now = Date.now();
+  const chain = now - state.lastMatchAt <= 2200;
+  state.streak = chain ? state.streak + 1 : 1;
+  state.lastMatchAt = now;
 
-  setHint(`Match! Cleared 3 × ${kind}.`);
-  beep(660, 80, "triangle", 0.05);
-  beep(880, 80, "triangle", 0.05);
+  const bonus = clamp(state.streak, 1, 8) * 5;
+  state.score += 30 + bonus;
 
-  // little basket flash
+  setHint(`Match! Cleared 3 × ${kind}. +${bonus} bonus (streak ${state.streak}).`);
+  beep(660, 70, "triangle", 0.05);
+  beep(880, 70, "triangle", 0.05);
+
   basketEl.animate(
     [{ transform: "scale(1)", filter: "brightness(1)" }, { transform: "scale(1.02)", filter: "brightness(1.15)" }, { transform: "scale(1)", filter: "brightness(1)" }],
     { duration: 240, easing: "ease-out" }
@@ -323,6 +330,9 @@ function win() {
 
 function lose() {
   setHint("Basket overflow!");
+  state.streak = 0;
+  state.lastMatchAt = 0;
+  updateHud();
   beep(180, 140, "square", 0.06);
   beep(140, 180, "square", 0.06);
   showModal("Game over", "Your basket is full. Try again with better grouping.");
@@ -332,6 +342,8 @@ function restart(level = 1, keepScore = false) {
   hideModal();
   state.level = level;
   state.basket = [];
+  state.streak = 0;
+  state.lastMatchAt = 0;
   if (!keepScore) state.score = 0;
 
   const { deck, cols, rows } = buildDeck(state.level);

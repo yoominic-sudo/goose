@@ -191,6 +191,23 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
+.danger {
+  margin-top: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.dangerFill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(124, 242, 198, 0.85), rgba(255, 214, 112, 0.9), rgba(255, 90, 122, 0.9));
+  transition: width 180ms ease;
+}
+
 .slot {
   height: 44px;
   border-radius: 12px;
