@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b1020" />
     <title>Goose Grab</title>
-    <link rel="icon" href="./assets/goose.svg" type="image/svg+xml" />
-    <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" href="./assets/goose.svg?v=20260217c" type="image/svg+xml" />
+    <link rel="manifest" href="./manifest.webmanifest?v=20260217c" />
+    <link rel="stylesheet" href="./styles.css?v=20260217c" />
   </head>
   <body>
     <div class="bg" aria-hidden="true"></div>
@@ -99,6 +99,11 @@
       </div>
     </div>
 
-    <script src="./app.js" type="module"></script>
+    <script>
+      // hard guard: always start with modal hidden (even if stale JS fails)
+      const _m = document.getElementById('modal');
+      if (_m) _m.setAttribute('hidden', '');
+    </script>
+    <script src="./app.js?v=20260217c" type="module"></script>
   </body>
 </html>
