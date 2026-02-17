@@ -1,0 +1,166 @@
+:root {
+  --bg: #090d1b;
+  --bg2: #111a35;
+  --neon: #3be5ff;
+  --neon2: #ff3fd2;
+  --ink: #e8f1ff;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  color: var(--ink);
+  background: radial-gradient(1000px 500px at 50% -10%, #253b7d, var(--bg));
+  overflow: hidden;
+}
+.bg {
+  position: fixed;
+  inset: -20vmax;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(59,229,255,.18), transparent 40%),
+    radial-gradient(circle at 80% 10%, rgba(255,63,210,.16), transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(86,120,255,.18), transparent 50%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+.game-wrap {
+  position: relative;
+  z-index: 1;
+  width: min(460px, 100vw);
+  margin: 0 auto;
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 10px 10px max(14px, env(safe-area-inset-bottom));
+}
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.logo {
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(59,229,255,.5);
+}
+.stats { display: flex; gap: 8px; align-items: center; }
+.pill {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(8,12,28,.55);
+  backdrop-filter: blur(6px);
+}
+.btn {
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(8,12,28,.65);
+  color: var(--ink);
+  border-radius: 12px;
+  padding: 7px 12px;
+  font-weight: 700;
+}
+.btn.primary {
+  background: linear-gradient(135deg, var(--neon), var(--neon2));
+  color: #0c1125;
+  border: none;
+}
+.game {
+  position: relative;
+  overflow: hidden;
+  border-radius: 26px;
+  border: 1px solid rgba(255,255,255,.2);
+  margin: 10px 0;
+  box-shadow: 0 25px 70px rgba(0,0,0,.45);
+  touch-action: none;
+  background: linear-gradient(180deg, #121a36 0%, #090d1b 100%);
+}
+.road {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 26px,
+      rgba(255,255,255,.12) 26px 42px
+    );
+  animation: roadMove 0.9s linear infinite;
+}
+@keyframes roadMove {
+  from { background-position-y: 0; }
+  to { background-position-y: 42px; }
+}
+.road::before,
+.road::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 36%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(255,255,255,.05), transparent 35%);
+}
+.road::before { left: 0; border-right: 1px solid rgba(255,255,255,.12); }
+.road::after { right: 0; border-left: 1px solid rgba(255,255,255,.12); }
+.car, .obstacle {
+  position: absolute;
+  width: 44px;
+  height: 74px;
+  border-radius: 11px;
+}
+.car {
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #9ff6ff, #2ac8ff 55%, #1f6eff);
+  box-shadow: 0 0 16px rgba(59,229,255,.6), 0 8px 18px rgba(0,0,0,.45);
+}
+.car::before {
+  content: "";
+  position: absolute;
+  inset: 10px 8px;
+  border-radius: 8px;
+  background: rgba(10,18,45,.8);
+}
+.obstacle {
+  background: linear-gradient(180deg, #ffc0f3, #ff6fd6 55%, #ff337f);
+  box-shadow: 0 0 14px rgba(255,63,210,.45), 0 8px 16px rgba(0,0,0,.4);
+}
+.obstacle::before {
+  content: "";
+  position: absolute;
+  inset: 10px 8px;
+  border-radius: 8px;
+  background: rgba(44,10,38,.75);
+}
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, transparent 35%, rgba(0,0,0,.35) 100%);
+  pointer-events: none;
+}
+.tips {
+  text-align: center;
+  font-size: 12px;
+  opacity: .85;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(10px);
+  z-index: 5;
+}
+.overlay[hidden] { display: none !important; }
+.card {
+  width: min(360px, 92vw);
+  background: rgba(8,12,28,.8);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 18px;
+  padding: 20px;
+  text-align: center;
+}
+.card h1, .card h2 { margin: 0 0 8px; }
+.card p { margin: 0 0 14px; color: rgba(232,241,255,.85); }
