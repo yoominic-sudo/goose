@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Apex Lane X</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg"></div>
+    <main class="wrap">
+      <header class="hud">
+        <div class="brand">APEX LANE X</div>
+        <div class="chips">
+          <div class="chip">Score <span id="score">0</span></div>
+          <div class="chip">Speed <span id="speed">160</span> km/h</div>
+          <div class="chip">Best <span id="best">0</span></div>
+        </div>
+      </header>
+
+      <section id="stage" class="stage" aria-label="racing game">
+        <canvas id="game"></canvas>
+        <div class="touch-hint">左右滑动变道 · 躲避来车</div>
+      </section>
+
+      <footer class="footer">移动端优先 · 单手可玩</footer>
+    </main>
+
+    <div class="overlay" id="startOverlay">
+      <div class="panel">
+        <h1>Apex Lane X</h1>
+        <p>手指左右滑动切换车道。速度会持续上升，撞车即结束。</p>
+        <button id="btnStart" class="btn primary">开始比赛</button>
+      </div>
+    </div>
+
+    <div class="overlay" id="overOverlay" hidden>
+      <div class="panel">
+        <h2>碰撞结束</h2>
+        <p>本局得分：<span id="finalScore">0</span></p>
+        <button id="btnRetry" class="btn primary">再来一局</button>
+      </div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
