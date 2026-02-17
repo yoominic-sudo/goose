@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <symbol id="leaf" viewBox="0 0 64 64">
+      <path d="M50 14C36 14 18 22 14 40c-2 8 2 14 10 14 18 0 26-18 26-32z" fill="#7cf2c6"/>
+      <path d="M20 46c8-10 20-18 30-22" fill="none" stroke="#0b1020" stroke-opacity="0.35" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="star" viewBox="0 0 64 64">
+      <path d="M32 6l8 18 20 2-15 13 5 19-18-10-18 10 5-19L4 26l20-2z" fill="#7aa7ff"/>
+    </symbol>
+    <symbol id="berry" viewBox="0 0 64 64">
+      <circle cx="24" cy="34" r="14" fill="#ff5a7a"/>
+      <circle cx="40" cy="30" r="12" fill="#ff7a92" opacity="0.95"/>
+      <path d="M32 14c-4 2-7 6-8 10" fill="none" stroke="#7cf2c6" stroke-width="5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="shell" viewBox="0 0 64 64">
+      <path d="M12 40c2-14 16-24 32-20 8 2 12 7 8 14-4 10-16 18-28 18-8 0-14-5-12-12z" fill="#ffd670"/>
+      <path d="M22 44c8-6 18-10 28-12" fill="none" stroke="#0b1020" stroke-opacity="0.3" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="feather" viewBox="0 0 64 64">
+      <path d="M14 46c14-22 30-34 36-30 6 4-2 24-20 36-10 6-20 6-16-6z" fill="#dcbfff"/>
+      <path d="M18 44c12-10 24-18 34-22" fill="none" stroke="#0b1020" stroke-opacity="0.3" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="stone" viewBox="0 0 64 64">
+      <path d="M18 50c-8-6-10-18-2-28 8-10 24-12 34-4 10 8 10 24 0 32-8 8-22 8-32 0z" fill="#bcd0d8"/>
+      <path d="M24 26c6-4 14-6 20-4" fill="none" stroke="#0b1020" stroke-opacity="0.25" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>

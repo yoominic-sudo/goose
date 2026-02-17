@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b1020" />
+    <title>Goose Grab</title>
+    <link rel="icon" href="./assets/goose.svg" type="image/svg+xml" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true"></div>
+
+    <main class="wrap" id="app">
+      <header class="top">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <img src="./assets/goose.svg" alt="" />
+          </div>
+          <div>
+            <div class="title">Goose Grab</div>
+            <div class="subtitle">mobile match-3 in a basket (original)</div>
+          </div>
+        </div>
+
+        <div class="hud">
+          <div class="pill">
+            <span class="k">Score</span>
+            <span class="v" id="score">0</span>
+          </div>
+          <div class="pill">
+            <span class="k">Level</span>
+            <span class="v" id="level">1</span>
+          </div>
+          <button class="btn" id="btnMute" type="button">Sound: on</button>
+          <button class="btn" id="btnRestart" type="button">Restart</button>
+        </div>
+      </header>
+
+      <section class="stage" aria-label="Game">
+        <div class="board" id="board" aria-label="Board"></div>
+
+        <aside class="side">
+          <div class="card">
+            <div class="cardTitle">Basket</div>
+            <div class="basket" id="basket" aria-label="Basket slots">
+              <div class="slot"></div>
+              <div class="slot"></div>
+              <div class="slot"></div>
+              <div class="slot"></div>
+              <div class="slot"></div>
+              <div class="slot"></div>
+              <div class="slot"></div>
+            </div>
+            <div class="cardHint" id="hint">
+              Tap a tile to send it to the basket. Match 3 of the same to clear.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="cardTitle">Goal</div>
+            <div class="goal">
+              <div class="goalRow">
+                <span class="k">Clear tiles:</span>
+                <span class="v" id="goal">0</span>
+              </div>
+              <div class="goalRow">
+                <span class="k">Remaining:</span>
+                <span class="v" id="remaining">0</span>
+              </div>
+            </div>
+            <div class="cardHint">Tip: keep the basket under control. When it fills up, you lose.</div>
+          </div>
+        </aside>
+      </section>
+
+      <footer class="foot">
+        <div class="small">Made for GitHub Pages. Works best on mobile. No external assets.</div>
+      </footer>
+    </main>
+
+    <div class="modal" id="modal" hidden>
+      <div class="modalCard">
+        <div class="modalTitle" id="modalTitle">You win!</div>
+        <div class="modalText" id="modalText">Nice. Next level?</div>
+        <div class="modalActions">
+          <button class="btn primary" id="btnNext" type="button">Next</button>
+          <button class="btn" id="btnAgain" type="button">Play again</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
