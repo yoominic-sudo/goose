@@ -20,7 +20,7 @@
           </div>
           <div>
             <div class="title">Goose Grab</div>
-            <div class="subtitle">mobile match-3 in a basket (original)</div>
+            <div class="subtitle">3D-realistic inspired: find-pair + layered elimination</div>
           </div>
         </div>
 
@@ -34,9 +34,10 @@
             <span class="v" id="level">1</span>
           </div>
           <div class="pill">
-            <span class="k">Streak</span>
-            <span class="v" id="streak">0</span>
+            <span class="k">Time</span>
+            <span class="v" id="timeLeft">10:00</span>
           </div>
+          <button class="btn" id="btnShake" type="button">颠锅</button>
           <button class="btn" id="btnMute" type="button">Sound: on</button>
           <button class="btn" id="btnRestart" type="button">Restart</button>
         </div>
@@ -47,7 +48,7 @@
 
         <aside class="side">
           <div class="card">
-            <div class="cardTitle">Basket</div>
+            <div class="cardTitle">物品栏</div>
             <div class="basket" id="basket" aria-label="Basket slots">
               <div class="slot"></div>
               <div class="slot"></div>
@@ -61,29 +62,29 @@
               <div class="dangerFill" id="dangerFill"></div>
             </div>
             <div class="cardHint" id="hint">
-              Tap a tile to send it to the basket. Match 3 of the same to clear.
+              点两个相同且有可达路径的顶层物品可消除。
             </div>
           </div>
 
           <div class="card">
-            <div class="cardTitle">Goal</div>
+            <div class="cardTitle">目标</div>
             <div class="goal">
               <div class="goalRow">
-                <span class="k">Clear tiles:</span>
+                <span class="k">总物品:</span>
                 <span class="v" id="goal">0</span>
               </div>
               <div class="goalRow">
-                <span class="k">Remaining:</span>
+                <span class="k">剩余:</span>
                 <span class="v" id="remaining">0</span>
               </div>
             </div>
-            <div class="cardHint">Tip: keep the basket under control. When it fills up, you lose.</div>
+            <div class="cardHint">10 分钟内清空场景即抓到大鹅；物品栏满或超时失败。</div>
           </div>
         </aside>
       </section>
 
       <footer class="foot">
-        <div class="small">Made for GitHub Pages. Works best on mobile. No external assets. Build: codex-default test.</div>
+        <div class="small">原创玩法实现：层叠消除 + 路径连通 + 颠锅重排（移动端优先）。</div>
       </footer>
     </main>
 
