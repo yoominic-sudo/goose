@@ -15,6 +15,7 @@ const btnMute = $("#btnMute");
 const btnShake = $("#btnShake");
 
 const modal = $("#modal");
+modal.hidden = true;
 const modalTitle = $("#modalTitle");
 const modalText = $("#modalText");
 const btnNext = $("#btnNext");
